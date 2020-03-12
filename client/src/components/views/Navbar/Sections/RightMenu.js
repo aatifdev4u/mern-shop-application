@@ -1,7 +1,7 @@
 import React from 'react';
 import { Menu } from 'antd';
 import axios from 'axios';
-import { USER_SERVER } from '../../../../utils/config';
+import { USER_SERVER } from '../../../../resources/config';
 import { withRouter } from 'react-router-dom';
 import { useSelector } from "react-redux";
 
@@ -32,6 +32,9 @@ function RightMenu(props) {
   } else {
     return (
       <Menu mode={props.mode}>
+        <Menu.Item key="logout">
+          <a href="/product/upload">Upload</a>
+        </Menu.Item>
         <Menu.Item key="logout">
           <a onClick={logoutHandler}>Logout</a>
         </Menu.Item>
