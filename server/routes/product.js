@@ -99,6 +99,25 @@ router.post("/getProduct", (req, res) => {
  
  });
 
+//  /api/product/productId?_id=${productId}&type=single
+router.get("/productId", (req, res) => {
+    let type = req.query.type;
+    let productIds = req.query._id;
+
+    if(type === 'array'){
+
+    }
+
+    // we need to find the product information that belong to product Id
+    Product.find({ '_id' : { $in : productIds}})
+    .populate('writer')
+    .exec((err, product)=>{
+        if(err) return res.status(400).send(err)
+        return res.status(200).send(product)
+    })
+ 
+ });
+
 
 
 module.exports = router;
