@@ -4,6 +4,9 @@ import axios from 'axios';
 import { USER_SERVER } from '../../../../resources/config';
 import { withRouter } from 'react-router-dom';
 import { useSelector } from "react-redux";
+import { Badge } from 'antd';
+
+import { ShoppingCartOutlined} from '@ant-design/icons';
 
 function RightMenu(props) {
   const user = useSelector(state => state.user)
@@ -32,11 +35,15 @@ function RightMenu(props) {
   } else {
     return (
       <Menu mode={props.mode}>
-        <Menu.Item key="logout">
+        <Menu.Item key="upload">
           <a href="/product/upload">Upload</a>
         </Menu.Item>
-        <Menu.Item key="logout">
-          <a href="/user/cart">Cart</a>
+        <Menu.Item key="cart">
+          <Badge count={user.userData && user.userData.cart.length}>
+            <a href="/user/cart">
+                <ShoppingCartOutlined style={{fontSize: '30px'}}/>
+              </a>
+          </Badge>
         </Menu.Item>
         <Menu.Item key="logout">
           <a onClick={logoutHandler}>Logout</a>

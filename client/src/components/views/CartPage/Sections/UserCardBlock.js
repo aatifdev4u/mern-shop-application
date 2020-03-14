@@ -2,6 +2,13 @@ import React from 'react'
 
 function UserCardBlock(props) {
 
+
+    const removeItem=(productId)=>{
+        props.removeItem(productId)
+
+    }
+
+
     const renderCartImage = (images)=>{
         if(images.length){
             let image = images[0];
@@ -17,10 +24,11 @@ function UserCardBlock(props) {
                 </td>
                 <td>{product.quantity}</td>
                 <td>$ {product.price}</td>
-                <td><button>Remove</button></td>
+                <td><button onClick={()=>removeItem(product._id)}>Remove</button></td>
             </tr>
         ))
     )
+    console.log(props.products);
     return (
         <div>
             <table>
