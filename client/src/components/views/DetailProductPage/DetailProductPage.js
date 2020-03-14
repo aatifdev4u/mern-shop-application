@@ -3,13 +3,16 @@ import { Row, Col} from 'antd';
 import ProductImage from './Sections/ProductImage';
 import ProductInfo from './Sections/ProductInfo';
 import Axios from 'axios';
+import { useDispatch} from 'react-redux';
+import { addToCart } from '../../../_actions/userActions';
 
 function DetailProductPage(props) {
     const productId = props.match.params.productId;
     const [Product, setProduct] = useState([]);
+    const dispatch = useDispatch();
 
     useEffect(() => {
-       Axios.get(`/api/product/productId?_id=${productId}&type=single`)
+       Axios.get(`/api/product/products_by_id?id=${productId}&type=single`)
        .then(response => {
             if(response.data){
                 console.log(response.data);
@@ -17,6 +20,10 @@ function DetailProductPage(props) {
             }
        })
     }, [])
+
+    const addToCartHandler = (productId)=>{
+        dispatch(addToCart(productId));
+    }
 
 
     return (
@@ -29,7 +36,7 @@ function DetailProductPage(props) {
                     <ProductImage detail={Product}/>
                </Col>
                <Col lg={12} xs={24}>
-                    <ProductInfo detail={Product}/>
+                    <ProductInfo detail={Product} addToCart={addToCartHandler}/>
                </Col>
            </Row>
         </div>
