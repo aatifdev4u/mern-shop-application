@@ -1,8 +1,10 @@
 const express = require('express');
 const router = express.Router();
+const async = require('async');
 const { User } = require("../models/User");
 const { Product } = require("../models/Product");
 const { auth } = require("../middleware/auth");
+
 
 //=================================
 //             User
@@ -19,7 +21,7 @@ router.get("/auth", auth, (req, res) => {
         role: req.user.role,
         image: req.user.image,
         cart: req.user.cart,
-        history: req.user.history,
+        history: req.user.history
     });
 });
 
